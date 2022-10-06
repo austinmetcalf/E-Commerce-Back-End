@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
   Category.findAll({include:[Product]})
   .then(response=>res.status(200).json(response))
-  .catch(err=>res.json(err))
+  .catch(err=>res.status(400).json(err))
 });
 //localhost:3001/api/categories/4
 router.get('/:id', (req, res) => {
@@ -21,14 +21,14 @@ router.get('/:id', (req, res) => {
     id:req.params.id
   }})
   .then(response=>res.status(200).json(response))
-  .catch(err=>res.json(err))
+  .catch(err=>res.status(400).json(err))
 });
 
 router.post('/', (req, res) => {
   // create a new category
   Category.create(req.body)
   .then(response=>res.status(200).json(response))
-  .catch(err=>res.json(err))
+  .catch(err=>res.status(400).json(err))
 });
 
 router.put('/:id', (req, res) => {
@@ -38,6 +38,8 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     }
   })
+  .then(response=>res.status(200).json(response))
+  .catch(err=>res.status(400).json(err))
 });
 
 
@@ -48,6 +50,8 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
+  .then(response=>res.status(200).json(response))
+  .catch(err=>res.status(400).json(err))
 });
 
 module.exports = router;

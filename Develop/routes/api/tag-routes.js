@@ -12,6 +12,10 @@ router.get('/', (req, res) => {
       attributes: ['product_name', 'price', 'stock', 'id']
     }
   })
+  .then(dbTagData => res.status(200).json(dbTagData))
+  .catch(err => {
+    res.status(500).json(err);
+  })
 });
 
 router.get('/:id', (req, res) => {
@@ -26,12 +30,20 @@ router.get('/:id', (req, res) => {
       attributes: ['product_name', 'price', 'stock', 'id']
     }
   })
+  .then(dbTagData => res.status(200).json(dbTagData))
+  .catch(err => {
+    res.status(500).json(err);
+  })
 });
 
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
     tag_name: req.body.tag_name
+  })
+  .then(dbTagData => res.status(200).json(dbTagData))
+  .catch(err => {
+    res.status(500).json(err);
   })
 });
 
@@ -42,6 +54,13 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     }
   })
+    .then(dbTagData => {
+      
+    res.status(200).json(dbTagData)
+  })
+  .catch(err => {
+    res.status(500).json(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {
@@ -51,6 +70,12 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
+  .then(dbTagData => {
+  res.status(200).json(dbTagData)
+  })
+.catch(err=>{
+  res.status(500).json(err);
+  });
 });
 
 module.exports = router;
